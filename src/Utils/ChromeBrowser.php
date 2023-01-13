@@ -11,10 +11,10 @@ class ChromeBrowser
 {
     private WebDriver $driver;
 
-    public function __construct(WebDriver $driver)
-    {
-        $this->driver = $driver;
-    }
+    // public function __construct(WebDriver $driver)
+    // {
+    //     $this->driver = $driver;
+    // }
 
     public function OpeningChromeBrowser()
     {
@@ -23,6 +23,19 @@ class ChromeBrowser
         $options = new ChromeOptions();
         $options->addArguments(['headless']);
         $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
-        self::$driver = RemoteWebDriver::create($host, $capabilities);
+        $this->driver = RemoteWebDriver::create($host, $capabilities);
+    }
+
+    public function OpeningChromeBrowserWithHost(String $host)
+    {
+        $capabilities = DesiredCapabilities::chrome();
+        $options = new ChromeOptions();
+        $options->addArguments(['headless']);
+        $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
+        $this->driver = RemoteWebDriver::create($host, $capabilities);
+    }
+
+    public function GetDriver() : WebDriver {
+        return $this->driver;
     }
 }
