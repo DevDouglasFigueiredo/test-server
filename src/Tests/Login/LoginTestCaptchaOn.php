@@ -19,8 +19,9 @@ class LoginTestCaptchaOn extends TestCase
     public static function setUpBeforeClass(): void
     {
       
-      $chromeBrowser = new ChromeBrowser(self::$driver);
+      $chromeBrowser = new ChromeBrowser();
       $chromeBrowser->OpeningChromeBrowser();
+      self::$driver = $chromeBrowser->GetDriver();
     }
     
     protected function setUp(): void
