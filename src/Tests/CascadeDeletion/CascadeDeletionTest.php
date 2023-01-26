@@ -33,34 +33,34 @@ class CascadeDeletionTest extends TestCase
     public function testTopDownCascadeDeletion()
     {
         $pageCascadeDeletion = new PageCascadeDeletion(self::$driver);
-        // $pageCascadeDeletion->clickToAddAccount();
-        // $this->assertStringContainsString(
-        //     "Adicionar Conta",
-        //     self::$driver->getPageSource()
-        // );
+        $pageCascadeDeletion->clickToAddAccount();
+        $this->assertStringContainsString(
+            "Adicionar Conta",
+            self::$driver->getPageSource()
+        );
 
-        // $pageCascadeDeletion->fillFieldsAccount("Conta teste", "admin@utech.com.br");
-        // $this->assertStringContainsString(
-        //     "Registro salvo com sucesso!",
-        //     self::$driver->getPageSource(),
-        //     "houve um erro ao salvar o registro"
-        // );
+        $pageCascadeDeletion->fillFieldsAccount("Conta teste", "admin@utech.com.br");
+        $this->assertStringContainsString(
+            "Registro salvo com sucesso!",
+            self::$driver->getPageSource(),
+            "houve um erro ao salvar o registro"
+        );
 
-        // $pageCascadeDeletion->clickToAddDevice();
-        // $pageCascadeDeletion->fillFieldsDevice();
+        $pageCascadeDeletion->clickToAddDevice();
+        $pageCascadeDeletion->fillFieldsDevice();
         // // $this->assertStringContainsString(
         // //     "Registro salvo com sucesso!",
         // //     self::$driver->getPageSource(),
         // //     "mensagem nao visualizada"
         // // );
-        // $this->assertSame(
-        //     "http://localhost:8080/admin/public/admin/device/add/",
-        //     self::$driver->getCurrentURL()
-        // );
-        // $this->assertNotSame(
-        //     "http://localhost:8080/admin/public/admin/device/",
-        //     self::$driver->getCurrentURL()
-        // );
+        $this->assertSame(
+            "http://localhost:8080/admin/public/admin/device/add/",
+            self::$driver->getCurrentURL()
+        );
+        $this->assertNotSame(
+            "http://localhost:8080/admin/public/admin/device/",
+            self::$driver->getCurrentURL()
+        );
 
         // $pageCascadeDeletion->clickToAddCamera();
         // $pageCascadeDeletion->fillFieldsCamera();
@@ -91,8 +91,8 @@ class CascadeDeletionTest extends TestCase
         //     self::$driver->getCurrentURL()
         // );
 
-        $pageCascadeDeletion->clickToAddGroup();
-        $pageCascadeDeletion->fillFieldsGroup();
+        // $pageCascadeDeletion->clickToAddGroup();
+        // $pageCascadeDeletion->fillFieldsGroup();
     }
 
     // public static function tearDownAfterClass(): void
