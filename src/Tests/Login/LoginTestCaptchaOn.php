@@ -20,8 +20,8 @@ class LoginTestCaptchaOn extends TestCase
     {
       
       $chromeBrowser = new ChromeBrowser();
-      $chromeBrowser->OpeningChromeBrowser();
-      self::$driver = $chromeBrowser->GetDriver();
+      $chromeBrowser->testingOpeningChromeBrowser();
+      self::$driver = $chromeBrowser->getDriver();
     }
     
     protected function setUp(): void

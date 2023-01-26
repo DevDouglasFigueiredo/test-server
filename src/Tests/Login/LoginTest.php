@@ -19,14 +19,10 @@ class LoginTest extends TestCase
   public static function setUpBeforeClass(): void
   {
 
-    $host = 'http://localhost:4444/wd/hub';
-    $capabilities = DesiredCapabilities::chrome();
-    $options = new ChromeOptions();
-    $options->addArguments(['headless']);
-    $capabilities->setCapability(ChromeOptions::CAPABILITY, $options);
-    self::$driver = RemoteWebDriver::create($host, $capabilities);
-   
-
+    $chromeBrowser = new ChromeBrowser();
+    // $chromeBrowser->testingOpeningChromeBrowser();
+    $chromeBrowser->testingWithBrowserClosed();
+    self::$driver = $chromeBrowser->getDriver();
   }
 
   protected function setUp(): void
@@ -59,7 +55,7 @@ class LoginTest extends TestCase
     );
   }
 
-  
+
   public function testLoginSucess()
   {
     $this->pageLogin->fillFieldsAs("admin@utech.com.br", "admin");
@@ -96,6 +92,3 @@ class LoginTest extends TestCase
     self::$driver->close();
   }
 }
-
-
-
