@@ -16,6 +16,7 @@ class ChromeBrowser
         $host = 'http://localhost:4444/wd/hub';
         $capabilities = DesiredCapabilities::chrome();
         $this->driver = RemoteWebDriver::create($host, $capabilities);
+        // $this->driver->manage()->window()->maximize();
     }
 
 

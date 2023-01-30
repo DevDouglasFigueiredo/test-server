@@ -1,12 +1,13 @@
 <?php
 
-namespace src\PageObject;
+namespace src\Tests\CascadeDeletion\PageObject;
 
 use Exception;
 use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverExpectedCondition;
-use src\Functions\Functions;
+use Facebook\WebDriver\WebDriverWait;
+use src\Tests\CascadeDeletion\Functions\Functions;
 use src\Utils\ShortcutElements;
 
 class PageCascadeDeletion extends Functions
@@ -18,48 +19,93 @@ class PageCascadeDeletion extends Functions
         $this->driver = $driver;
     }
 
-    // public function buttonClickToAdd()
-    // {
-    //     $addAccount = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div:nth-child(1) > div > div > div > a");
-    //     $this->driver->findElement($addAccount)->click();
-    // }
+    public function buttonClickToAdd()
+    {
+        $addAccount = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div:nth-child(1) > div > div > div > a");
+        $this->driver->findElement($addAccount)->click();
+    }
 
-    // public function clickOnElement($elementToBeClicked)
-    // {
-    //     $this->driver->findElement($elementToBeClicked)->click();
-    // }
+    public function clickOnElement($elementToBeClicked)
+    {
+        $this->driver->findElement($elementToBeClicked)->click();
+    }
 
-    // public function fillField($element, $value)
-    // {
-    //     $this->driver->findElement($element)->sendKeys($value);
-    // }
+    public function fillField($element, $value)
+    {
+        $this->driver->findElement($element)->sendKeys($value);
+    }
 
-    // public function chosenIOSPlatform()
-    // {
-    //     $inputToken = WebDriverBy::cssSelector('input[name = "token"]');
-    //     $this->fillField($inputToken, $this->generateNumbers(8));
+    public function chosenIOSPlatform()
+    {
+        $inputToken = WebDriverBy::cssSelector('input[name = "token"]');
+        $this->fillField($inputToken, $this->generateNumbers(8));
 
-    //     $inputExtraToken = WebDriverBy::cssSelector('input[name = "extra_token"]');
-    //     $this->fillField($inputExtraToken, $this->generateNumbers(10));
-    // }
+        $inputExtraToken = WebDriverBy::cssSelector('input[name = "extra_token"]');
+        $this->fillField($inputExtraToken, $this->generateNumbers(10));
+    }
 
-    // public function chosenAndroidPlatform()
-    // {
-    //     $android = WebDriverBy::cssSelector('option[value = "android"]');
-    //     $this->clickOnElement($android);
+    public function chosenAndroidPlatform()
+    {
+        $android = WebDriverBy::cssSelector('option[value = "android"]');
+        $this->clickOnElement($android);
 
-    //     $inputToken = WebDriverBy::cssSelector('input[name = "token"]');
-    //     $this->fillField($inputToken, $this->generateNumbers(10));
-    // }
+        $inputToken = WebDriverBy::cssSelector('input[name = "token"]');
+        $this->fillField($inputToken, $this->generateNumbers(10));
+    }
 
-    public function clickToAddAccount()
+    public function navigateToUserSession()
+    {
+        $urlUser = $this->driver->get("http://localhost:8080/admin/public/admin/user/");
+        if (!$urlUser) {
+            throw new Exception("Pagina não encontrada");
+        }
+    }
+
+    public function navigateToAccountSession()
     {
         $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/account/");
         if (!$urlAccount) {
             throw new Exception("Pagina não encontrada");
         }
-        $this->buttonClickToAdd();
     }
+
+    public function navigateToDeviceSession()
+    {
+        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/device/");
+        if (!$urlAccount) {
+            throw new Exception("Pagina não encontrada");
+        }
+    }
+
+    public function navigateToCameraSession()
+    {
+        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/camera/");
+        if (!$urlAccount) {
+            throw new Exception("Pagina não encontrada");
+        }
+    }
+
+    public function navigateToTokenSession()
+    {
+        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/token");
+        if (!$urlAccount) {
+            throw new Exception("Pagina não encontrada");
+        }
+    }
+
+    public function navigateToGroupSession()
+    {
+        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/group/");
+        if (!$urlAccount) {
+            throw new Exception("Pagina não encontrada");
+        }
+    }
+
+   public function clickToAdd ()
+   {
+       $this->buttonClickToAdd();
+   }
+
 
     public function fillFieldsAccount(string $name, string $email)
     {
@@ -74,22 +120,14 @@ class PageCascadeDeletion extends Functions
         $this->clickOnElement($saveButton);
     }
 
-    public function clickToAddDevice()
-    {
-        $urlDevice = $this->driver->get("http://localhost:8080/admin/public/admin/device/");
-        if (!$urlDevice) {
-            throw new Exception("Pagina não encontrada");
-        }
-        $this->buttonClickToAdd();
-    }
 
     public function fillFieldsDevice()
     {
 
         $inputAccount = WebDriverBy::cssSelector("#general > div:nth-child(2) > div > span > span.selection > span > span.select2-selection__arrow");
-        self::clickOnElement($inputAccount);
+        $this->clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "19"]');
+        $chooseAccount = WebDriverBy::cssSelector('option[value = "1" ]');
         $this->clickOnElement($chooseAccount);
 
         $chooseDevice = WebDriverBy::cssSelector('option[value = "MPI-31EV"]');
@@ -98,7 +136,7 @@ class PageCascadeDeletion extends Functions
         $inputControl = WebDriverBy::cssSelector("#general > div:nth-child(4) > div > span");
         $this->clickOnElement($inputControl);
 
-        $chooseControls = WebDriverBy::cssSelector('option[value = "4"]');
+        $chooseControls = WebDriverBy::cssSelector('option[value = "1"]');
         $this->clickOnElement($chooseControls);
 
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
@@ -113,65 +151,47 @@ class PageCascadeDeletion extends Functions
     }
 
 
-    public function clickToAddCamera()
-    {
-        $urlCamera = $this->driver->get("http://localhost:8080/admin/public/admin/camera/");
-        if (!$urlCamera) {
-            throw new Exception("Pagina não encontrada");
-        }
-        $this->buttonClickToAdd();
-    }
-
     public function fillFieldsCamera()
     {
         $inputAccount = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div > div > div > div.ibox-content > form > div:nth-child(1) > div > span > span.selection > span");
         $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated($inputAccount));
         $this->clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "19"]');
+        $chooseAccount = WebDriverBy::cssSelector('option[value = "1"]');
         $this->clickOnElement($chooseAccount);
 
         $inputDevice = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div > div > div > div.ibox-content > form > div:nth-child(2) > div > span > span.selection > span > span.select2-selection__arrow");
         $this->clickOnElement($inputDevice);
 
-        $chooseDevice = WebDriverBy::cssSelector('option[value = "25"]');
+        $chooseDevice = WebDriverBy::cssSelector('option[value = "1"]');
         $this->clickOnElement($chooseDevice);
-        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated($chooseDevice));
 
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
         $this->fillField($inputName, $this->generateName("Cam", 4));
 
         $inputUrl = WebDriverBy::cssSelector('input[name = "url"]');
-        $this->fillField($inputUrl, "rtsp://[USER]:[PASSWORD]@[IP]:[PORTA]/cam[STREAM]/h264");
+        $this->fillField($inputUrl, "rtsp://[USER]:[PASSWORD]@[IP]:[PORTA]/cam[STREAM]/h284");
 
-        $chooseInterface = WebDriverBy::cssSelector('option[value = "4"]');
+        $chooseInterface = WebDriverBy::cssSelector('option[value = "1"]');
         $this->clickOnElement($chooseInterface);
 
         $saveButtonCam = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div > div > div > div.ibox-content > form > div:nth-child(6) > div > input");
         $this->clickOnElement($saveButtonCam);
     }
 
-    public function clickToAddToken()
-    {
-        $urlToken = $this->driver->get("http://localhost:8080/admin/public/admin/token/");
-        if (!$urlToken) {
-            throw new Exception("Pagina não encontrada");
-        }
-        $this->buttonClickToAdd();
-    }
 
     public function fillFieldsToken()
     {
         $inputAccount = WebDriverBy::cssSelector("#general > div:nth-child(1) > div > span");
         self::clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "19"]');
+        $chooseAccount = WebDriverBy::cssSelector('option[value = "1"]');
         $this->clickOnElement($chooseAccount);
 
         $inputDevice = WebDriverBy::cssSelector("#general > div:nth-child(2) > div > span");
         $this->clickOnElement($inputDevice);
 
-        $chooseDevice = WebDriverBy::cssSelector('option[value = "25"]');
+        $chooseDevice = WebDriverBy::cssSelector('option[value = "1"]');
         $this->clickOnElement($chooseDevice);
 
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
@@ -184,7 +204,7 @@ class PageCascadeDeletion extends Functions
         $this->fillField($inputUser, $this->generateNumbers(4));
 
         $inputPassword = WebDriverBy::cssSelector('input[name = "password"]');
-        $this->fillField($inputPassword, "1254");
+        $this->fillField($inputPassword, "1284");
 
         $navPlatform = WebDriverBy::xpath('//*[@id="token-form"]/div/ul/li[2]');
         $this->clickOnElement($navPlatform);
@@ -196,27 +216,19 @@ class PageCascadeDeletion extends Functions
         $this->clickOnElement($savebuttonToken);
     }
 
-    public function clickToAddGroup()
-    {
-        $urlGroup = $this->driver->get("http://localhost:8080/admin/public/admin/group/");
-        if (!$urlGroup) {
-            throw new Exception("Pagina não encontrada");
-        }
-        $this->buttonClickToAdd();
-    }
 
     public function fillFieldsGroup()
     {
         $inputAccount = WebDriverBy::cssSelector("#group-form > div:nth-child(2) > div > span > span.selection > span");
         self::clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "19"]');
+        $chooseAccount = WebDriverBy::cssSelector('option[value = "1"]');
         $this->clickOnElement($chooseAccount);
 
         $inputDevice = WebDriverBy::cssSelector("#group-form > div:nth-child(3) > div > span > span.selection > span");
         $this->clickOnElement($inputDevice);
 
-        $chooseDevice = WebDriverBy::cssSelector('option[value = "25"]');
+        $chooseDevice = WebDriverBy::cssSelector('option[value = "1"]');
         $this->clickOnElement($chooseDevice);
 
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
@@ -225,14 +237,25 @@ class PageCascadeDeletion extends Functions
         $buttonAddToken = WebDriverBy::id("btn-add-token");
         $this->clickOnElement($buttonAddToken);
 
-        $inputToken = WebDriverBy::cssSelector("#div-new-token-1 > div.col-md-10.col-sm-9.col-xs-8 > span > span.selection > span");
-        $this->clickOnElement($inputToken);
-
-        $chooseToken = WebDriverBy::cssSelector('option[value = "6"]');
+        $chooseToken = WebDriverBy::cssSelector('option[value = "1"]');
         $this->clickOnElement($chooseToken);
 
-        $savebuttonToken = WebDriverBy::id("#submit-btn");
+        $savebuttonToken = WebDriverBy::id("submit-btn");
         $this->clickOnElement($savebuttonToken);
         
     }
+
+    public function clickForDeleteAccount()
+    {
+        $this->driver->get("http://localhost:8080/admin/public/admin/account/");
+
+        $trash = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div:nth-child(3) > div > div > div.ibox-content > table > tbody > tr > td:nth-child(8) > a.upn-btn-actions.upn-btn-delete > i");
+        $this->clickOnElement($trash);
+
+        $this->driver->manage()->timeouts()->implicitlyWait(5);
+
+        $buttonDelete = WebDriverBy::id("btn-confirm-delete");
+        $this->clickOnElement($buttonDelete);
+    }
+
 }

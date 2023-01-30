@@ -2,13 +2,13 @@
 
 namespace src\Tests\Login;
 
+use src\Utils\ChromeBrowser;
 use PHPUnit\Framework\TestCase;
 use Facebook\WebDriver\WebDriver;
-use src\PageObject\PageLoginTest;
 use Facebook\WebDriver\Chrome\ChromeOptions;
+use src\Tests\Login\PageObject\PageLoginTest;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
-use src\Utils\ChromeBrowser;
 
 class LoginTestCaptchaOn extends TestCase
 {

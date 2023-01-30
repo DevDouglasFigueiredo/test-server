@@ -7,7 +7,7 @@
         <testsuite name="Testes">
             <!-- <directory>src/Tests/Login/LoginTest.php</directory> -->
             <!-- <directory>src/Tests/Login/LoginTestCaptchaOn.php</directory> -->
-            <directory>src/Tests/CascadeDeletion/CascadeDeletionTest.php</directory>
+            <directory>src/Tests/CascadeDeletion/AccountCascadeDeletionTest.php</directory>
         </testsuite>
     </testsuites>
      <logging>
