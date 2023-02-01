@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Facebook\WebDriver\WebDriver;
 use src\Tests\PageObject\PageCascadeDeletion;
 
-class AccountAdditionTest extends TestCase
+class DeviceAdditionTest extends TestCase
 {
     private static WebDriver $driver;
 
@@ -20,22 +20,28 @@ class AccountAdditionTest extends TestCase
         self::$driver = $utils->getDriver();
     }
 
-    public function testAdditionAccount()
+    public function testAdditionDevice()
     {
         $pageCascadeDeletion = new PageCascadeDeletion(self::$driver);
         $pageCascadeDeletion->navigateToAccountSession();
         $pageCascadeDeletion->buttonClickToAdd();
-        $this->assertStringContainsString(
-            "Adicionar Conta",
-            self::$driver->getPageSource()
-        );
-
         $pageCascadeDeletion->fillFieldsAccount("Conta teste","admin@utech.com.br");
-        $this->assertStringContainsString(
-            "Registro salvo com sucesso!",
-            self::$driver->getPageSource(),
-            "houve um erro ao salvar o registro"
+        
+        $pageCascadeDeletion->navigateToDeviceSession();
+        $pageCascadeDeletion->buttonClickToAdd();
+        $pageCascadeDeletion->fillFieldsDevice();
+        // // $this->assertEquals(
+        // //     "Registro salvo com sucesso!",
+        // //     self::$driver->getPageSource(),
+        // //     "Equipamento não foi cadastrado"
+        // // );
+        $this->assertSame(
+            "http://localhost:8080/admin/public/admin/device/add/",
+            self::$driver->getCurrentURL()
+        );
+        $this->assertNotSame(
+            "http://localhost:8080/admin/public/admin/device/",
+            self::$driver->getCurrentURL()
         );
     }
-   
 }

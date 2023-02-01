@@ -10,7 +10,9 @@
             <!-- <directory>src/Tests/CascadeDeletion/AccountCascadeDeletionTest.php</directory> -->
             <!-- <directory>src/Tests/CascadeDeletion/UserCascadeDeletionTest.php</directory> -->
             <!-- <directory>src/Tests/CascadeDeletion/DeviceCascadeDeletionTest.php</directory> -->
-            <directory>src/Tests/CascadeDeletion/TokenCascadeDeletionTest.php</directory>
+            <!-- <directory>src/Tests/CascadeDeletion/TokenCascadeDeletionTest.php</directory> -->
+            <!-- <directory>src/Tests/Addition/AccountAdditionTest.php</directory> -->
+            <directory>src/Tests/Addition/DeviceAdditionTest.php</directory>
         </testsuite>
     </testsuites>
      <logging>

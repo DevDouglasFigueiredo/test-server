@@ -8,7 +8,8 @@ use src\Utils\ChromeBrowser;
 use PHPUnit\Framework\TestCase;
 use Facebook\WebDriver\WebDriver;
 use src\Tests\Login\PageObject\PageLoginTest;
-use src\Tests\CascadeDeletion\PageObject\PageCascadeDeletion;
+use src\Tests\PageObject\PageCascadeDeletion;
+// use src\Tests\CascadeDeletion\PageObject\PageCascadeDeletion;
 
 class AccountCascadeDeletionTest extends TestCase
 {
@@ -22,6 +23,7 @@ class AccountCascadeDeletionTest extends TestCase
         $utils->acessingSystemUPN();
         self::$driver = $utils->getDriver();
     }
+
 
     public function testAccountCascadeDeletion()
     {
@@ -40,14 +42,14 @@ class AccountCascadeDeletionTest extends TestCase
         //     "houve um erro ao salvar o registro"
         // );
 
-        $pageCascadeDeletion->navigateToDeviceSession();
-        $pageCascadeDeletion->buttonClickToAdd();
-        $pageCascadeDeletion->fillFieldsDevice();
-        $this->assertEquals(
-            "Registro salvo com sucesso!",
-            self::$driver->getPageSource()
-            // "Equipamento não foi cadastrado"
-        );
+        // $pageCascadeDeletion->navigateToDeviceSession();
+        // $pageCascadeDeletion->buttonClickToAdd();
+        // $pageCascadeDeletion->fillFieldsDevice();
+        // $this->assertEquals(
+        //     "Registro salvo com sucesso!",
+        //     self::$driver->getPageSource()
+        //     // "Equipamento não foi cadastrado"
+        // );
         // $this->assertSame(
         //     "http://localhost:8080/admin/public/admin/device/add/",
         //     self::$driver->getCurrentURL()

@@ -6,7 +6,8 @@ use src\Utils\Utils;
 use PHPUnit\Framework\TestCase;
 use Facebook\WebDriver\WebDriver;
 use src\Tests\Login\PageObject\PageLoginTest;
-use src\Tests\CascadeDeletion\PageObject\PageCascadeDeletion;
+// use src\Tests\CascadeDeletion\PageObject\PageCascadeDeletion;
+use src\Tests\PageObject\PageCascadeDeletion;
 
 class DeviceCascadeDeletionTest extends TestCase
 {
@@ -23,10 +24,22 @@ class DeviceCascadeDeletionTest extends TestCase
 
     public function testDeviceCascadeDeletion()
     {
-        // $accountCascadeDeletion = new AccountCascadeDeletionTest();
-        // $accountCascadeDeletion->testAccountCascadeDeletion();
-
         $pageCascadeDeletion = new PageCascadeDeletion(self::$driver);
+        $pageCascadeDeletion->navigateToAccountSession();
+        $pageCascadeDeletion->buttonClickToAdd();
+        $pageCascadeDeletion->fillFieldsAccount("Conta teste", "admin@utech.com.br");
+        $pageCascadeDeletion->navigateToDeviceSession();
+        $pageCascadeDeletion->buttonClickToAdd();
+        $pageCascadeDeletion->fillFieldsDevice();
+        $pageCascadeDeletion->navigateToCameraSession();
+        $pageCascadeDeletion->buttonClickToAdd();
+        $pageCascadeDeletion->fillFieldsCamera();
+        $pageCascadeDeletion->navigateToTokenSession();
+        $pageCascadeDeletion->buttonClickToAdd();
+        $pageCascadeDeletion->fillFieldsToken();
+        $pageCascadeDeletion->navigateToGroupSession();
+        $pageCascadeDeletion->buttonClickToAdd();
+        $pageCascadeDeletion->fillFieldsGroup();
         $pageCascadeDeletion->clickForDeleteDevice();
         $this->assertStringContainsString(
             "Registro excluido com sucesso!",

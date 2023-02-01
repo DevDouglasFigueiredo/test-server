@@ -1,7 +1,5 @@
 <?php
-
-
-namespace src\Tests\CascadeDeletion\PageObject;
+namespace src\Tests\PageObject;
 
 use Exception;
 use Facebook\WebDriver\WebDriver;
@@ -115,7 +113,7 @@ class PageCascadeDeletion extends Functions
         $inputAccount = WebDriverBy::cssSelector("#general > div:nth-child(2) > div > span > span.selection > span > span.select2-selection__arrow");
         $function->clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "11" ]');
+        $chooseAccount = WebDriverBy::cssSelector('option[value = "12" ]');
         $function->clickOnElement($chooseAccount);
 
         $chooseDevice = WebDriverBy::cssSelector('option[value = "MPI-31EV"]');
@@ -146,13 +144,13 @@ class PageCascadeDeletion extends Functions
         // $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated($inputAccount));
         $function->clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "11"]');
+        $chooseAccount = WebDriverBy::cssSelector('option[value = "12"]');
         $function->clickOnElement($chooseAccount);
 
         $inputDevice = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div > div > div > div.ibox-content > form > div:nth-child(2) > div > span > span.selection > span > span.select2-selection__arrow");
         $function->clickOnElement($inputDevice);
 
-        $chooseDevice = WebDriverBy::cssSelector('option[value = "26"]');
+        $chooseDevice = WebDriverBy::cssSelector('option[value = "35"]');
         $function->clickOnElement($chooseDevice);
 
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
@@ -174,13 +172,13 @@ class PageCascadeDeletion extends Functions
         $inputAccount = WebDriverBy::cssSelector("#general > div:nth-child(1) > div > span");
         $function->clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "9"]');
+        $chooseAccount = WebDriverBy::cssSelector('option[value = "12"]');
         $function->clickOnElement($chooseAccount);
 
         $inputDevice = WebDriverBy::cssSelector("#general > div:nth-child(2) > div > span");
         $function->clickOnElement($inputDevice);
 
-        $chooseDevice = WebDriverBy::cssSelector('option[value = "16"]');
+        $chooseDevice = WebDriverBy::cssSelector('option[value = "35"]');
         $function->clickOnElement($chooseDevice);
 
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
@@ -212,13 +210,13 @@ class PageCascadeDeletion extends Functions
         $inputAccount = WebDriverBy::cssSelector("#group-form > div:nth-child(2) > div > span > span.selection > span");
         $function->clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "8"]');
+        $chooseAccount = WebDriverBy::cssSelector('option[value = "12"]');
         $function->clickOnElement($chooseAccount);
 
         $inputDevice = WebDriverBy::cssSelector("#group-form > div:nth-child(3) > div > span > span.selection > span");
         $function->clickOnElement($inputDevice);
 
-        $chooseDevice = WebDriverBy::cssSelector('option[value = "6"]');
+        $chooseDevice = WebDriverBy::cssSelector('option[value = "35"]');
         $function->clickOnElement($chooseDevice);
 
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
@@ -227,7 +225,7 @@ class PageCascadeDeletion extends Functions
         $buttonAddToken = WebDriverBy::id("btn-add-token");
         $function->clickOnElement($buttonAddToken);
 
-        $chooseToken = WebDriverBy::cssSelector('option[value = "5"]');
+        $chooseToken = WebDriverBy::cssSelector('option[value = "36"]');
         $function->clickOnElement($chooseToken);
 
         $savebuttonToken = WebDriverBy::id("submit-btn");
