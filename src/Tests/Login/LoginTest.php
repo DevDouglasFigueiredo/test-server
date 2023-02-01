@@ -9,6 +9,7 @@ use Facebook\WebDriver\Chrome\ChromeOptions;
 use src\Tests\Login\PageObject\PageLoginTest;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
+use src\Utils\Utils;
 
 class LoginTest extends TestCase
 {
@@ -19,10 +20,10 @@ class LoginTest extends TestCase
   public static function setUpBeforeClass(): void
   {
 
-    $chromeBrowser = new ChromeBrowser();
-    // $chromeBrowser->testingOpeningChromeBrowser();
-    $chromeBrowser->testingWithBrowserClosed();
-    self::$driver = $chromeBrowser->getDriver();
+    $utils = new Utils();
+    // $utils->testingOpeningChromeBrowser();
+    $utils->testingWithBrowserClosed();
+    self::$driver = $utils->getDriver();
   }
 
   protected function setUp(): void

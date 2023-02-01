@@ -8,6 +8,13 @@ use Facebook\WebDriver\WebDriverBy;
 class Functions
 {
 
+    private WebDriver $driver;
+
+    public function __construct(WebDriver $driver)
+    {
+        $this->driver = $driver;
+    }
+
     protected function generateName(string $name, int $length)
     {
         $characters = '0123456789abcdefghijklmnopqrstuvxwyz';
@@ -30,6 +37,16 @@ class Functions
         }
 
         return $serial;
+    }
+
+    public function clickOnElement($elementToBeClicked)
+    {
+        $this->driver->findElement($elementToBeClicked)->click();
+    }
+
+    public function fillField($element, $value)
+    {
+        $this->driver->findElement($element)->sendKeys($value);
     }
 
 }

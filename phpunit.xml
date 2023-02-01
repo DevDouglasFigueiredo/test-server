@@ -7,7 +7,10 @@
         <testsuite name="Testes">
             <!-- <directory>src/Tests/Login/LoginTest.php</directory> -->
             <!-- <directory>src/Tests/Login/LoginTestCaptchaOn.php</directory> -->
-            <directory>src/Tests/CascadeDeletion/AccountCascadeDeletionTest.php</directory>
+            <!-- <directory>src/Tests/CascadeDeletion/AccountCascadeDeletionTest.php</directory> -->
+            <!-- <directory>src/Tests/CascadeDeletion/UserCascadeDeletionTest.php</directory> -->
+            <!-- <directory>src/Tests/CascadeDeletion/DeviceCascadeDeletionTest.php</directory> -->
+            <directory>src/Tests/CascadeDeletion/TokenCascadeDeletionTest.php</directory>
         </testsuite>
     </testsuites>
      <logging>
