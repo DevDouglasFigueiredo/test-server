@@ -3,11 +3,11 @@
 namespace src\Tests\Addition;
 
 use src\Utils\Utils;
-use PHPUnit\Framework\TestCase;
 use Facebook\WebDriver\WebDriver;
+use PHPUnit\Framework\TestCase;
 use src\Tests\PageObject\MainPageObject;
 
-class AccountAdditionTest extends TestCase
+class CameraAdditionTest extends TestCase
 {
     private static WebDriver $driver;
 
@@ -20,27 +20,34 @@ class AccountAdditionTest extends TestCase
         self::$driver = $utils->getDriver();
     }
 
-    public function testAdditionAccount()
+    public function testAdditionDevice()
     {
         $mainPageObject = new MainPageObject(self::$driver);
         $mainPageObject->navigateToAccountSession();
         $mainPageObject->buttonClickToAdd();
-        $this->assertStringContainsString(
-            "Adicionar Conta",
-            self::$driver->getPageSource()
-        );
-
         $mainPageObject->fillFieldsAccount("Conta teste","admin@utech.com.br");
+        
+        $mainPageObject->navigateToDeviceSession();
+        $mainPageObject->buttonClickToAdd();
+        $mainPageObject->fillFieldsDevice();
+
+        $mainPageObject->navigateToCameraSession();
+        $mainPageObject->buttonClickToAdd();
+        $mainPageObject->fillFieldsCamera();
         $this->assertStringContainsString(
             "Registro salvo com sucesso!",
             self::$driver->getPageSource(),
             "houve um erro ao salvar o registro"
         );
+        $this->assertSame(
+            "http://localhost:8080/admin/public/admin/camera",
+            self::$driver->getCurrentURL(),
+            "houve um erro ao salvar o registro"
+        );
     }
-    
+
     public static function tearDownAfterClass(): void
     {
         self::$driver->close();
     }
-   
 }

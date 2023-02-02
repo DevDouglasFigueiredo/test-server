@@ -9,7 +9,7 @@ use Facebook\WebDriver\WebDriverWait;
 use src\Tests\CascadeDeletion\Functions\Functions;
 use src\Utils\ShortcutElements;
 
-class PageCascadeDeletion extends Functions
+class MainPageObject extends Functions
 {
     private WebDriver $driver;
 

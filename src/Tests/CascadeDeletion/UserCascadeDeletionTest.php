@@ -6,8 +6,7 @@ use src\Utils\Utils;
 use PHPUnit\Framework\TestCase;
 use Facebook\WebDriver\WebDriver;
 use src\Tests\Login\PageObject\PageLoginTest;
-use src\Tests\PageObject\PageCascadeDeletion;
-// use src\Tests\CascadeDeletion\PageObject\PageCascadeDeletion;
+use src\Tests\PageObject\MainPageObject;
 
 class UserCascadeDeletionTest extends TestCase
 {
@@ -25,41 +24,46 @@ class UserCascadeDeletionTest extends TestCase
 
     public function testUserCascadeDeletion()
     {
-        $pageCascadeDeletion = new PageCascadeDeletion(self::$driver);
-        $pageCascadeDeletion->navigateToAccountSession();
-        $pageCascadeDeletion->buttonClickToAdd();
-        $pageCascadeDeletion->fillFieldsAccount("Conta teste", "admin@utech.com.br");
-        $pageCascadeDeletion->navigateToDeviceSession();
-        $pageCascadeDeletion->buttonClickToAdd();
-        $pageCascadeDeletion->fillFieldsDevice();
-        $pageCascadeDeletion->navigateToCameraSession();
-        $pageCascadeDeletion->buttonClickToAdd();
-        $pageCascadeDeletion->fillFieldsCamera();
-        $pageCascadeDeletion->navigateToTokenSession();
-        $pageCascadeDeletion->buttonClickToAdd();
-        $pageCascadeDeletion->fillFieldsToken();
-        $pageCascadeDeletion->navigateToGroupSession();
-        $pageCascadeDeletion->buttonClickToAdd();
-        $pageCascadeDeletion->fillFieldsGroup();
-        $pageCascadeDeletion->clickForDeleteUser();
+        $mainPageObject = new MainPageObject(self::$driver);
+        $mainPageObject->navigateToAccountSession();
+        $mainPageObject->buttonClickToAdd();
+        $mainPageObject->fillFieldsAccount("Conta teste", "admin@utech.com.br");
+        $mainPageObject->navigateToDeviceSession();
+        $mainPageObject->buttonClickToAdd();
+        $mainPageObject->fillFieldsDevice();
+        $mainPageObject->navigateToCameraSession();
+        $mainPageObject->buttonClickToAdd();
+        $mainPageObject->fillFieldsCamera();
+        $mainPageObject->navigateToTokenSession();
+        $mainPageObject->buttonClickToAdd();
+        $mainPageObject->fillFieldsToken();
+        $mainPageObject->navigateToGroupSession();
+        $mainPageObject->buttonClickToAdd();
+        $mainPageObject->fillFieldsGroup();
+        $mainPageObject->clickForDeleteUser();
         $this->assertStringContainsString(
             "Registro excluido com sucesso!",
             self::$driver->getPageSource(),
             "houve um erro ao salvar o registro"
         );
-        $pageCascadeDeletion->navigateToTokenSession();
+        $mainPageObject->navigateToTokenSession();
         $this->assertIsNumeric(4, "Dispositivo não removido");
 
-        $pageCascadeDeletion->navigateToGroupSession();
+        $mainPageObject->navigateToGroupSession();
         $this->assertIsNumeric(3, "Grupo não removido");
 
-        $pageCascadeDeletion->navigateToCameraSession();
+        $mainPageObject->navigateToCameraSession();
         $this->assertIsNumeric(3, "Câmera não removida");
 
-        $pageCascadeDeletion->navigateToDeviceSession();
+        $mainPageObject->navigateToDeviceSession();
         $this->assertIsNumeric(5, "Equipamento não removido");
 
-        $pageCascadeDeletion->navigateToAccountSession();
+        $mainPageObject->navigateToAccountSession();
         $this->assertIsNumeric(5, "Conta não removida");
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        self::$driver->close();
     }
 }

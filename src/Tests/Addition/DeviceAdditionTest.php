@@ -5,7 +5,7 @@ namespace src\Tests\Addition;
 use src\Utils\Utils;
 use PHPUnit\Framework\TestCase;
 use Facebook\WebDriver\WebDriver;
-use src\Tests\PageObject\PageCascadeDeletion;
+use src\Tests\PageObject\MainPageObject;
 
 class DeviceAdditionTest extends TestCase
 {
@@ -22,19 +22,14 @@ class DeviceAdditionTest extends TestCase
 
     public function testAdditionDevice()
     {
-        $pageCascadeDeletion = new PageCascadeDeletion(self::$driver);
-        $pageCascadeDeletion->navigateToAccountSession();
-        $pageCascadeDeletion->buttonClickToAdd();
-        $pageCascadeDeletion->fillFieldsAccount("Conta teste","admin@utech.com.br");
+        $mainPageObject = new MainPageObject(self::$driver);
+        $mainPageObject->navigateToAccountSession();
+        $mainPageObject->buttonClickToAdd();
+        $mainPageObject->fillFieldsAccount("Conta teste","admin@utech.com.br");
         
-        $pageCascadeDeletion->navigateToDeviceSession();
-        $pageCascadeDeletion->buttonClickToAdd();
-        $pageCascadeDeletion->fillFieldsDevice();
-        // // $this->assertEquals(
-        // //     "Registro salvo com sucesso!",
-        // //     self::$driver->getPageSource(),
-        // //     "Equipamento não foi cadastrado"
-        // // );
+        $mainPageObject->navigateToDeviceSession();
+        $mainPageObject->buttonClickToAdd();
+        $mainPageObject->fillFieldsDevice();
         $this->assertSame(
             "http://localhost:8080/admin/public/admin/device/add/",
             self::$driver->getCurrentURL()
@@ -43,5 +38,15 @@ class DeviceAdditionTest extends TestCase
             "http://localhost:8080/admin/public/admin/device/",
             self::$driver->getCurrentURL()
         );
+        // // $this->assertEquals(
+        // //     "Registro salvo com sucesso!",
+        // //     self::$driver->getPageSource(),
+        // //     "Equipamento não foi cadastrado"
+        // // );
+    }
+
+    public static function tearDownAfterClass(): void
+    {
+        self::$driver->close();
     }
 }

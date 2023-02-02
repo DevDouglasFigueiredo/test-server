@@ -12,7 +12,9 @@
             <!-- <directory>src/Tests/CascadeDeletion/DeviceCascadeDeletionTest.php</directory> -->
             <!-- <directory>src/Tests/CascadeDeletion/TokenCascadeDeletionTest.php</directory> -->
             <!-- <directory>src/Tests/Addition/AccountAdditionTest.php</directory> -->
-            <directory>src/Tests/Addition/DeviceAdditionTest.php</directory>
+            <!-- <directory>src/Tests/Addition/DeviceAdditionTest.php</directory> -->
+            <!-- <directory>src/Tests/Addition/CameraAdditionTest.php</directory> -->
+            <directory>src/Tests/Addition/GroupAdditionTest.php</directory>
         </testsuite>
     </testsuites>
      <logging>
