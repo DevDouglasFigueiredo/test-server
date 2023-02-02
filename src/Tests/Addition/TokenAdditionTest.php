@@ -20,7 +20,7 @@ class TokenAdditionTest extends TestCase
         self::$driver = $utils->getDriver();
     }
 
-    public function testAdditionDevice()
+    public function testAdditionToken()
     {
         $mainPageObject = new MainPageObject(self::$driver);
         $mainPageObject->navigateToAccountSession();

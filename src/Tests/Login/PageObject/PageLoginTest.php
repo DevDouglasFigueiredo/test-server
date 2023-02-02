@@ -3,6 +3,8 @@ namespace src\Tests\Login\PageObject;
 
 use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverBy;
+use PHPUnit\Framework\TestCase;
+use src\Utils\Functions\Functions;
 
 class PageLoginTest
 {
@@ -14,24 +16,30 @@ class PageLoginTest
     }
 
     public function fillFieldsAs(string $email, string $password)
-    {
+    {   
+        
+        $function = new Functions($this->driver);
         $inputEmail = WebDriverBy::id("loginMail");
-        $this->driver->findElement($inputEmail)->sendKeys(['user' => $email]);
+        $function->fillField($inputEmail, ['user' => $email]);
 
         $inputPassword = WebDriverBy::id("loginPass");
-        $this->driver->findElement($inputPassword)->sendKeys(['pass' => $password]);
+        $function->fillField($inputPassword, ['pass' => $password]);
 
     }
 
     public function clickButtonLogin()
-    {
+    {   
+        $function = new Functions($this->driver);
+
         $buttonLogin = WebDriverBy::id("loginButton");
-        $this->driver->findElement($buttonLogin)->click();
+        $function->clickOnElement($buttonLogin);
     }
 
     public function captchaInvalid(string $valueCaptcha)
-    {
+    {   
+        $function = new Functions($this->driver);
+
         $inputCaptcha = WebDriverBy::id("captchaInput");
-        $this->driver->findElement($inputCaptcha)->sendKeys($valueCaptcha);
+        $function->fillField($inputCaptcha, $valueCaptcha);
     }
 }

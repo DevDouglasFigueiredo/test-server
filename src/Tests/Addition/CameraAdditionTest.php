@@ -20,7 +20,7 @@ class CameraAdditionTest extends TestCase
         self::$driver = $utils->getDriver();
     }
 
-    public function testAdditionDevice()
+    public function testAdditionCamera()
     {
         $mainPageObject = new MainPageObject(self::$driver);
         $mainPageObject->navigateToAccountSession();

@@ -2,18 +2,19 @@
 namespace src\Tests\PageObject;
 
 use Exception;
-use Facebook\WebDriver\WebDriver;
-use Facebook\WebDriver\WebDriverBy;
-use Facebook\WebDriver\WebDriverExpectedCondition;
-use Facebook\WebDriver\WebDriverWait;
-use src\Tests\CascadeDeletion\Functions\Functions;
 use src\Utils\ShortcutElements;
+use Facebook\WebDriver\WebDriver;
+
+use src\Utils\Functions\Functions;
+use Facebook\WebDriver\WebDriverBy;
+use Facebook\WebDriver\WebDriverWait;
+use Facebook\WebDriver\WebDriverExpectedCondition;
+
 
 class MainPageObject extends Functions
 {
     private WebDriver $driver;
 
-    
     public function __construct(WebDriver $driver)
     {
         $this->driver = $driver;

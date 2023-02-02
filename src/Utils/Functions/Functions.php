@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Tests\CascadeDeletion\Functions;
+namespace src\Utils\Functions;
 
 use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverBy;

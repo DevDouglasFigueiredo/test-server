@@ -20,7 +20,7 @@ class GroupAdditionTest extends TestCase
         self::$driver = $utils->getDriver();
     }
 
-    public function testAdditionDevice()
+    public function testAdditionGroup()
     {
         $mainPageObject = new MainPageObject(self::$driver);
         $mainPageObject->navigateToAccountSession();
