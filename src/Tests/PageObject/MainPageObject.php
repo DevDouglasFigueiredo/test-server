@@ -9,7 +9,8 @@ use src\Utils\Functions\Functions;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverWait;
 use Facebook\WebDriver\WebDriverExpectedCondition;
-
+use Facebook\WebDriver\WebDriverOptions;
+use Facebook\WebDriver\WebDriverSelect;
 
 class MainPageObject extends Functions
 {
@@ -114,8 +115,9 @@ class MainPageObject extends Functions
         $inputAccount = WebDriverBy::cssSelector("#general > div:nth-child(2) > div > span > span.selection > span > span.select2-selection__arrow");
         $function->clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "12" ]');
-        $function->clickOnElement($chooseAccount);
+        $chooseAccount = WebDriverBy::xpath('//*[@id="general"]/div[2]/div/select');
+        $selectAccount = new WebDriverSelect($this->driver->findElement($chooseAccount));
+        $selectAccount->selectByIndex(1);
 
         $chooseDevice = WebDriverBy::cssSelector('option[value = "MPI-31EV"]');
         $function->clickOnElement($chooseDevice);
@@ -133,7 +135,6 @@ class MainPageObject extends Functions
         $function->fillField($inputSerial, $function->generateNumbers(10));
 
         $saveButtonDevice = WebDriverBy::cssSelector("#device-form > div.form-group > div > a.btn.btn-sm.btn-primary");
-        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated($saveButtonDevice));
         $function->clickOnElement($saveButtonDevice);
     }
 
@@ -142,17 +143,18 @@ class MainPageObject extends Functions
     {   
         $function = new Functions($this->driver);
         $inputAccount = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div > div > div > div.ibox-content > form > div:nth-child(1) > div > span > span.selection > span");
-        // $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated($inputAccount));
         $function->clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "12"]');
-        $function->clickOnElement($chooseAccount);
+        $chooseAccount = WebDriverBy::xpath('//*[@id="page-wrapper"]/div[2]/div/div/div/div[2]/form/div[1]/div/select');
+        $selectAccount = new WebDriverSelect($this->driver->findElement($chooseAccount));
+        $selectAccount->selectByIndex(1);
 
         $inputDevice = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div > div > div > div.ibox-content > form > div:nth-child(2) > div > span > span.selection > span > span.select2-selection__arrow");
         $function->clickOnElement($inputDevice);
 
-        $chooseDevice = WebDriverBy::cssSelector('option[value = "35"]');
-        $function->clickOnElement($chooseDevice);
+        $chooseDevice = WebDriverBy::xpath('//*[@id="page-wrapper"]/div[2]/div/div/div/div[2]/form/div[2]/div/select');
+        $selectDevice = new WebDriverSelect($this->driver->findElement($chooseDevice));
+        $selectDevice->selectByIndex(1);
 
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
         $function->fillField($inputName, $function->generateName("Cam", 4));
@@ -173,15 +175,17 @@ class MainPageObject extends Functions
         $inputAccount = WebDriverBy::cssSelector("#general > div:nth-child(1) > div > span");
         $function->clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "12"]');
-        $function->clickOnElement($chooseAccount);
+        $chooseAccount = WebDriverBy::xpath('//*[@id="general"]/div[1]/div/select');
+        $selectAccount = new WebDriverSelect($this->driver->findElement($chooseAccount));
+        $selectAccount->selectByIndex(1);
 
         $inputDevice = WebDriverBy::cssSelector("#general > div:nth-child(2) > div > span");
         $function->clickOnElement($inputDevice);
 
-        $chooseDevice = WebDriverBy::cssSelector('option[value = "35"]');
-        $function->clickOnElement($chooseDevice);
-
+        $chooseDevice = WebDriverBy::xpath('//*[@id="general"]/div[2]/div/select');
+        $selectDevice = new WebDriverSelect($this->driver->findElement($chooseDevice));
+        $selectDevice->selectByIndex(1);
+        
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
         $function->fillField($inputName, $function->generateName("Token", 4));
 
@@ -211,23 +215,26 @@ class MainPageObject extends Functions
         $inputAccount = WebDriverBy::cssSelector("#group-form > div:nth-child(2) > div > span > span.selection > span");
         $function->clickOnElement($inputAccount);
 
-        $chooseAccount = WebDriverBy::cssSelector('option[value = "12"]');
-        $function->clickOnElement($chooseAccount);
+        $chooseAccount = WebDriverBy::xpath('//*[@id="group-form"]/div[1]/div/select');
+        $selectAccount = new WebDriverSelect($this->driver->findElement($chooseAccount));
+        $selectAccount->selectByIndex(1);
 
         $inputDevice = WebDriverBy::cssSelector("#group-form > div:nth-child(3) > div > span > span.selection > span");
         $function->clickOnElement($inputDevice);
-
-        $chooseDevice = WebDriverBy::cssSelector('option[value = "35"]');
-        $function->clickOnElement($chooseDevice);
-
+        
+        $chooseDevice = WebDriverBy::xpath('//*[@id="group-form"]/div[2]/div/select');
+        $selectDevice = new WebDriverSelect($this->driver->findElement($chooseDevice));
+        $selectDevice->selectByIndex(1);
+       
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
         $function->fillField($inputName, $function->generateName("Group", 4));
 
         $buttonAddToken = WebDriverBy::id("btn-add-token");
         $function->clickOnElement($buttonAddToken);
 
-        $chooseToken = WebDriverBy::cssSelector('option[value = "36"]');
-        $function->clickOnElement($chooseToken);
+        $chooseToken = WebDriverBy::xpath('//*[@id="new-token[1]"]');
+        $selectToken = new WebDriverSelect($this->driver->findElement($chooseToken));
+        $selectToken->selectByIndex(1);
 
         $savebuttonToken = WebDriverBy::id("submit-btn");
         $function->clickOnElement($savebuttonToken);

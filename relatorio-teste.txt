@@ -1,15 +1,3 @@
-Account Addition (src\Tests\Addition\AccountAddition)
- [x] Addition account
-
-Device Addition (src\Tests\Addition\DeviceAddition)
- [x] Addition device
-
-Camera Addition (src\Tests\Addition\CameraAddition)
- [x] Addition camera
-
-Token Addition (src\Tests\Addition\TokenAddition)
- [x] Addition token
-
 Group Addition (src\Tests\Addition\GroupAddition)
  [x] Addition group
 

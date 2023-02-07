@@ -23,13 +23,13 @@ class TokenAdditionTest extends TestCase
     public function testAdditionToken()
     {
         $mainPageObject = new MainPageObject(self::$driver);
-        $mainPageObject->navigateToAccountSession();
-        $mainPageObject->buttonClickToAdd();
-        $mainPageObject->fillFieldsAccount("Conta teste","admin@utech.com.br");
+        // $mainPageObject->navigateToAccountSession();
+        // $mainPageObject->buttonClickToAdd();
+        // $mainPageObject->fillFieldsAccount("Conta teste","admin@utech.com.br");
         
-        $mainPageObject->navigateToDeviceSession();
-        $mainPageObject->buttonClickToAdd();
-        $mainPageObject->fillFieldsDevice();
+        // $mainPageObject->navigateToDeviceSession();
+        // $mainPageObject->buttonClickToAdd();
+        // $mainPageObject->fillFieldsDevice();
 
         $mainPageObject->navigateToTokenSession();
         $mainPageObject->buttonClickToAdd();

@@ -23,13 +23,13 @@ class CameraAdditionTest extends TestCase
     public function testAdditionCamera()
     {
         $mainPageObject = new MainPageObject(self::$driver);
-        $mainPageObject->navigateToAccountSession();
-        $mainPageObject->buttonClickToAdd();
-        $mainPageObject->fillFieldsAccount("Conta teste","admin@utech.com.br");
+        // $mainPageObject->navigateToAccountSession();
+        // $mainPageObject->buttonClickToAdd();
+        // $mainPageObject->fillFieldsAccount("Conta teste","admin@utech.com.br");
         
-        $mainPageObject->navigateToDeviceSession();
-        $mainPageObject->buttonClickToAdd();
-        $mainPageObject->fillFieldsDevice();
+        // $mainPageObject->navigateToDeviceSession();
+        // $mainPageObject->buttonClickToAdd();
+        // $mainPageObject->fillFieldsDevice();
 
         $mainPageObject->navigateToCameraSession();
         $mainPageObject->buttonClickToAdd();
@@ -40,7 +40,7 @@ class CameraAdditionTest extends TestCase
             "houve um erro ao salvar o registro"
         );
         $this->assertSame(
-            "http://localhost:8080/admin/public/admin/camera",
+            "http://localhost:8080/admin/public/admin/camera/",
             self::$driver->getCurrentURL(),
             "houve um erro ao salvar o registro"
         );

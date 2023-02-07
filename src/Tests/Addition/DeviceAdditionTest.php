@@ -23,9 +23,9 @@ class DeviceAdditionTest extends TestCase
     public function testAdditionDevice()
     {
         $mainPageObject = new MainPageObject(self::$driver);
-        $mainPageObject->navigateToAccountSession();
-        $mainPageObject->buttonClickToAdd();
-        $mainPageObject->fillFieldsAccount("Conta teste","admin@utech.com.br");
+        // $mainPageObject->navigateToAccountSession();
+        // $mainPageObject->buttonClickToAdd();
+        // $mainPageObject->fillFieldsAccount("Conta teste","admin@utech.com.br");
         
         $mainPageObject->navigateToDeviceSession();
         $mainPageObject->buttonClickToAdd();

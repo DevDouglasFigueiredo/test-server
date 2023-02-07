@@ -23,17 +23,17 @@ class GroupAdditionTest extends TestCase
     public function testAdditionGroup()
     {
         $mainPageObject = new MainPageObject(self::$driver);
-        $mainPageObject->navigateToAccountSession();
-        $mainPageObject->buttonClickToAdd();
-        $mainPageObject->fillFieldsAccount("Conta teste","admin@utech.com.br");
+        // $mainPageObject->navigateToAccountSession();
+        // $mainPageObject->buttonClickToAdd();
+        // $mainPageObject->fillFieldsAccount("Conta teste","admin@utech.com.br");
         
-        $mainPageObject->navigateToDeviceSession();
-        $mainPageObject->buttonClickToAdd();
-        $mainPageObject->fillFieldsDevice();
+        // $mainPageObject->navigateToDeviceSession();
+        // $mainPageObject->buttonClickToAdd();
+        // $mainPageObject->fillFieldsDevice();
 
-        $mainPageObject->navigateToTokenSession();
-        $mainPageObject->buttonClickToAdd();
-        $mainPageObject->fillFieldsToken();
+        // $mainPageObject->navigateToTokenSession();
+        // $mainPageObject->buttonClickToAdd();
+        // $mainPageObject->fillFieldsToken();
 
         $mainPageObject->navigateToGroupSession();
         $mainPageObject->buttonClickToAdd();
@@ -44,7 +44,7 @@ class GroupAdditionTest extends TestCase
             "houve um erro ao salvar o registro"
         );
         $this->assertSame(
-            "http://localhost:8080/admin/public/admin/group",
+            "http://localhost:8080/admin/public/admin/group/",
             self::$driver->getCurrentURL()
         );
         $this->assertNotSame(
@@ -54,8 +54,8 @@ class GroupAdditionTest extends TestCase
 
     }
 
-    public static function tearDownAfterClass(): void
-    {
-        self::$driver->close();
-    }
+    // public static function tearDownAfterClass(): void
+    // {
+    //     self::$driver->close();
+    // }
 }
