@@ -5,16 +5,18 @@ use Exception;
 use src\Utils\ShortcutElements;
 use Facebook\WebDriver\WebDriver;
 
-use src\Utils\Functions\Functions;
+
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverWait;
-use Facebook\WebDriver\WebDriverExpectedCondition;
-use Facebook\WebDriver\WebDriverOptions;
 use Facebook\WebDriver\WebDriverSelect;
+use Facebook\WebDriver\WebDriverOptions;
+use src\Tests\Utils\Functions\Functions;
+use Facebook\WebDriver\WebDriverExpectedCondition;
 
 class MainPageObject extends Functions
 {
     private WebDriver $driver;
+    private string $tokenName;
 
     public function __construct(WebDriver $driver)
     {
@@ -38,7 +40,7 @@ class MainPageObject extends Functions
     }
 
     public function chosenAndroidPlatform()
-    {   
+    {
         $function = new Functions($this->driver);
         $android = WebDriverBy::cssSelector('option[value = "android"]');
         $function->clickOnElement($android);
@@ -49,7 +51,7 @@ class MainPageObject extends Functions
 
     public function navigateToUserSession()
     {
-        $urlUser = $this->driver->get("http://localhost:8080/admin/public/admin/user/");
+        $urlUser = $this->driver->get("http://localhost:8080/admin/public/admin/user");
         if (!$urlUser) {
             throw new Exception("Pagina não encontrada");
         }
@@ -57,7 +59,7 @@ class MainPageObject extends Functions
 
     public function navigateToAccountSession()
     {
-        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/account/");
+        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/account");
         if (!$urlAccount) {
             throw new Exception("Pagina não encontrada");
         }
@@ -65,7 +67,7 @@ class MainPageObject extends Functions
 
     public function navigateToDeviceSession()
     {
-        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/device/");
+        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/device");
         if (!$urlAccount) {
             throw new Exception("Pagina não encontrada");
         }
@@ -73,7 +75,7 @@ class MainPageObject extends Functions
 
     public function navigateToCameraSession()
     {
-        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/camera/");
+        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/camera");
         if (!$urlAccount) {
             throw new Exception("Pagina não encontrada");
         }
@@ -89,17 +91,17 @@ class MainPageObject extends Functions
 
     public function navigateToGroupSession()
     {
-        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/group/");
+        $urlAccount = $this->driver->get("http://localhost:8080/admin/public/admin/group");
         if (!$urlAccount) {
             throw new Exception("Pagina não encontrada");
         }
     }
 
-    public function fillFieldsAccount(string $name, string $email)
+    public function fillFieldsAccount(string $email)
     {
         $function = new Functions($this->driver);
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
-        $function->fillField($inputName, $name);
+        $function->fillField($inputName, $function->generateName("Conta - ", 4));
 
         $inputEmail = WebDriverBy::cssSelector('input[name = "email"]');
         $function->fillField($inputEmail, $email);
@@ -125,22 +127,33 @@ class MainPageObject extends Functions
         $inputControl = WebDriverBy::cssSelector("#general > div:nth-child(4) > div > span");
         $function->clickOnElement($inputControl);
 
-        $chooseControls = WebDriverBy::cssSelector('option[value = "2"]');
-        $function->clickOnElement($chooseControls);
+        $chooseControls = WebDriverBy::xpath('//*[@id="general"]/div[4]/div/select');
+        $selectControls = new WebDriverSelect($this->driver->findElement($chooseControls));
+        $selectControls->selectByIndex(1);
 
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
         $function->fillField($inputName, $function->generateName("Device", 4));
 
         $inputSerial = WebDriverBy::cssSelector('input[name = "serial"]');
         $function->fillField($inputSerial, $function->generateNumbers(10));
-
-        $saveButtonDevice = WebDriverBy::cssSelector("#device-form > div.form-group > div > a.btn.btn-sm.btn-primary");
-        $function->clickOnElement($saveButtonDevice);
     }
 
+    public function saveButtonDevice()
+    {
+        $function = new Functions($this->driver);
+        $saveButtonDevice = WebDriverBy::cssSelector("#device-form > div.form-group > div > a.btn.btn-sm.btn-primary");
+        $this->driver->wait()->until(WebDriverExpectedCondition::visibilityOfElementLocated($saveButtonDevice));
+        $function->clickOnElement($saveButtonDevice);
+
+        $sucessMessage = WebDriverBy::cssSelector("div > div.toast-message");
+        $assertMessage = $this->driver->findElement($sucessMessage)->getText();
+        if ($assertMessage !== "Registro salvo com sucesso!") {
+            throw new Exception("Houve um erro ao salvar o dispositivo");
+        }
+    }
 
     public function fillFieldsCamera()
-    {   
+    {
         $function = new Functions($this->driver);
         $inputAccount = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div > div > div > div.ibox-content > form > div:nth-child(1) > div > span > span.selection > span");
         $function->clickOnElement($inputAccount);
@@ -162,15 +175,18 @@ class MainPageObject extends Functions
         $inputUrl = WebDriverBy::cssSelector('input[name = "url"]');
         $function->fillField($inputUrl, "rtsp://[USER]:[PASSWORD]@[IP]:[PORTA]/cam[STREAM]/h284");
 
-        $chooseInterface = WebDriverBy::cssSelector('option[value = "1"]');
-        $function->clickOnElement($chooseInterface);
+        $chooseInterface = WebDriverBy::xpath('//*[@id="page-wrapper"]/div[2]/div/div/div/div[2]/form/div[5]/div/select');
+        $selectInterface = new WebDriverSelect($this->driver->findElement($chooseInterface));
+        $selectInterface->selectByValue(1);
 
         $saveButtonCam = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div > div > div > div.ibox-content > form > div:nth-child(6) > div > input");
         $function->clickOnElement($saveButtonCam);
     }
 
+
+
     public function fillFieldsToken()
-    {   
+    {
         $function = new Functions($this->driver);
         $inputAccount = WebDriverBy::cssSelector("#general > div:nth-child(1) > div > span");
         $function->clickOnElement($inputAccount);
@@ -185,9 +201,10 @@ class MainPageObject extends Functions
         $chooseDevice = WebDriverBy::xpath('//*[@id="general"]/div[2]/div/select');
         $selectDevice = new WebDriverSelect($this->driver->findElement($chooseDevice));
         $selectDevice->selectByIndex(1);
-        
+
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
-        $function->fillField($inputName, $function->generateName("Token", 4));
+        $this->tokenName = $function->generateName("Token", 4);
+        $function->fillField($inputName, $this->tokenName );
 
         $inputUuid = WebDriverBy::cssSelector('input[name = "uuid"]');
         $function->fillField($inputUuid, $function->generateNumbers(10));
@@ -209,8 +226,28 @@ class MainPageObject extends Functions
     }
 
 
+    public function getTokenName()
+    {
+        return $this->tokenName;
+    }
+
+    public function checkingIfTokenIsThere()
+    {
+        $function = new Functions($this->driver);
+        
+        $menuUser = WebDriverBy::cssSelector("#user > td > a");
+        $function->clickOnElement($menuUser);
+
+        $inputSearch = WebDriverBy::cssSelector('input[name = "filter"]');
+        $function->fillField($inputSearch, $this->getTokenName());
+
+        $btnSearch = WebDriverBy::cssSelector('input[name = "user_Search"]');
+        $function->clickOnElement($btnSearch);
+    }
+
+
     public function fillFieldsGroup()
-    {   
+    {
         $function = new Functions($this->driver);
         $inputAccount = WebDriverBy::cssSelector("#group-form > div:nth-child(2) > div > span > span.selection > span");
         $function->clickOnElement($inputAccount);
@@ -221,11 +258,11 @@ class MainPageObject extends Functions
 
         $inputDevice = WebDriverBy::cssSelector("#group-form > div:nth-child(3) > div > span > span.selection > span");
         $function->clickOnElement($inputDevice);
-        
+
         $chooseDevice = WebDriverBy::xpath('//*[@id="group-form"]/div[2]/div/select');
         $selectDevice = new WebDriverSelect($this->driver->findElement($chooseDevice));
         $selectDevice->selectByIndex(1);
-       
+
         $inputName = WebDriverBy::cssSelector('input[name = "name"]');
         $function->fillField($inputName, $function->generateName("Group", 4));
 
@@ -241,9 +278,9 @@ class MainPageObject extends Functions
     }
 
     public function clickForDeleteAccount()
-    {   
+    {
         $function = new Functions($this->driver);
-        $this->driver->get("http://localhost:8080/admin/public/admin/account/");
+        $this->driver->get("http://localhost:8080/admin/public/admin/account");
 
         $trash = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div:nth-child(3) > div > div > div.ibox-content > table > tbody > tr > td:nth-child(8) > a.upn-btn-actions.upn-btn-delete > i");
         $function->clickOnElement($trash);
@@ -255,9 +292,9 @@ class MainPageObject extends Functions
     }
 
     public function clickForDeleteUser()
-    {   
+    {
         $function = new Functions($this->driver);
-        $this->driver->get("http://localhost:8080/admin/public/admin/user/");
+        $this->driver->get("http://localhost:8080/admin/public/admin/user");
 
         $trash = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div:nth-child(3) > div > div > div.ibox-content > table > tbody > tr > td:nth-child(5) > a.upn-btn-actions.upn-btn-delete > i");
         $function->clickOnElement($trash);
@@ -269,9 +306,9 @@ class MainPageObject extends Functions
     }
 
     public function clickForDeleteDevice()
-    {   
+    {
         $function = new Functions($this->driver);
-        $this->driver->get("http://localhost:8080/admin/public/admin/device/");
+        $this->driver->get("http://localhost:8080/admin/public/admin/device");
 
         $trash = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div:nth-child(3) > div > div > div.ibox-content > table > tbody > tr > td:nth-child(6) > a.upn-btn-actions.upn-btn-delete > i");
         $function->clickOnElement($trash);
@@ -285,7 +322,7 @@ class MainPageObject extends Functions
     public function clickForDeleteToken()
     {
         $function = new Functions($this->driver);
-        $this->driver->get("http://localhost:8080/admin/public/admin/token/");
+        $this->driver->get("http://localhost:8080/admin/public/admin/token");
 
         $trash = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div:nth-child(3) > div > div > div.ibox-content > table > tbody > tr:nth-child(1) > td:nth-child(8) > a.upn-btn-actions.upn-btn-delete > i");
         $function->clickOnElement($trash);
@@ -297,10 +334,10 @@ class MainPageObject extends Functions
     }
 
     public function checkingIfTokenHasBeenDeleted()
-    {   
+    {
         $function = new Functions($this->driver);
         $buttonEditToken = WebDriverBy::cssSelector("#page-wrapper > div.row.border-bottom.dashboard-header > div:nth-child(3) > div > div > div.ibox-content > table > tbody > tr > td:nth-child(6) > a:nth-child(1) > i");
         $function->clickOnElement($buttonEditToken);
-        
     }
+
 }

@@ -1,10 +1,10 @@
 <?php
 namespace src\Tests\Login\PageObject;
 
+use PHPUnit\Framework\TestCase;
 use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverBy;
-use PHPUnit\Framework\TestCase;
-use src\Utils\Functions\Functions;
+use src\Tests\Utils\Functions\Functions;
 
 class PageLoginTest
 {

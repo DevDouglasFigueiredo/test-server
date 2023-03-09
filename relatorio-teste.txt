@@ -1,3 +1,3 @@
-Group Addition (src\Tests\Addition\GroupAddition)
- [x] Addition group
+Verify Token On Device (src\Tests\VerifyTokenOnDevice\VerifyTokenOnDevice)
+ [x] Verify token on device
 

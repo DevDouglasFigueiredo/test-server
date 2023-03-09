@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Utils;
+namespace src\Tests\Utils;
 
 use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverBy;

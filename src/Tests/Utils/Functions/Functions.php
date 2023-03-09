@@ -1,6 +1,6 @@
 <?php
 
-namespace src\Utils\Functions;
+namespace src\Tests\Utils\Functions;
 
 use Facebook\WebDriver\WebDriver;
 use Facebook\WebDriver\WebDriverBy;
@@ -9,6 +9,7 @@ class Functions
 {
 
     private WebDriver $driver;
+    private string $tokenName;
 
     public function __construct(WebDriver $driver)
     {
@@ -24,7 +25,9 @@ class Functions
             $randomName .= $characters[rand(0, $charactersLength
                 - 1)];
         }
-        return $name . "-" . $randomName;
+        $this->tokenName = $name . "-" . $randomName; // armazenar o valor gerado na nova propriedade
+        return $this->tokenName;
+
     }
 
     protected function generateNumbers(int $length)
